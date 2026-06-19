@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tasty Hub | Recipe Details </title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+   <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: solid; border-width:2px  }
+        .footer { padding: 20px; text-align: center; color: black; border-top: 2px solid;}
+        .logo { padding-top: 10px;}
+        .nav { display: flex; align-items: center; gap: 20px; }
+        .nav a {text-decoration: none; color: #000}
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-toggle{
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .profile-icon {
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 50px;
+            border: 1px solid;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            border: 1px solid;
+            min-width: 170px;
+            border-radius: 5px;
+            z-index: 1000; 
+            right: 0;
+        }
+
+        .category-table td {
+            border: none;
+        }
+
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+        }
+        .dropdown-content a:hover { background: #f0f0f0; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+.recipe-container {
+        max-width: 900px;
+        padding: 20px;
+        margin: 10px auto; 
+        border: 1px solid;
+}
+
+.recipe-column {
+    flex: 1; /* Ensures both columns take equal space */
+}
+
+.recipe-img {
+    width: 100%;
+    height: 250px;
+    border-radius: 5px;
+    border: 1px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    margin-bottom: 20px;
+}
+.recipe-column img {
+    width: 100%; /* Ensure  image takes full width of the column */
+}
+
+.row-recipe-details{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    grid-column-gap:20px; 
+}
+.recipe-column{
+    padding: 20px;
+    border-radius: 5px;
+    border: 2px solid;
+}
+
+
+.recipe-header {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.recipe-header .author {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.recipe-extra {
+    grid-column: span 2;
+    margin-top: 20px;
+    text-align: justify-all;
+}
+
+.info-grid {
+    margin-top: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Creates two equal columns */
+    gap: 15px; /* Adds space between items */
+    text-align: center; /* Centers text inside items */
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+}
+.nutrition {
+    padding: 15px;
+    border: 1px solid ; 
+    border-radius: 5px; 
+    margin-top: 20px; 
+    width: 50%;
+    margin-left: 200px;
+}
+
+.nutrition p {
+    font-size: x-large;
+    margin-bottom: 10px; 
+}
+
+ table {
+    width: 100%; /* Full width */
+    border-collapse: collapse; /* Collapse borders */
+}
+
+.nutri-table th, td {
+    padding: 8px; 
+    font-weight: normal;
+    text-align: left; /* Align text to the left */
+    border-bottom: 1px solid; /* Light gray border for rows */
+}
+
+p {
+    margin: 5px 0 0;
+    font-size: 14px;
+}
+
+.description {
+    grid-column: span 2; 
+    font-size: 16px;
+    text-align: justify-all;
+    margin: 50px 20px;
+}
+
+    .recipe-details ul {
+        list-style: none;
+        padding: 0;
+        margin-left: 20px;
+    }
+
+    .recipe-details li {
+        display: flex;
+        align-items: center;
+        gap: 8px; /* Adjust spacing between checkbox and text */
+    }
+
+    .recipe-details input[type="checkbox"] {
+        width: 16px;
+        height: 16px;
+    }
+
+textarea { width: 98%; height: 100px; padding: 10px; border: 1px solid; border-radius: 5px; font-size: 14px; resize: none;  margin-top: 30px;}
+.button { width: 30%; padding: 10px; margin-top: 10px; border: 1px solid; color: #000; border-radius: 5px; cursor: pointer; text-align: center; }
+
+.icons {
+    position: absolute;
+    right: 50px; /* Moves icons to the right */
+    top: 30px;
+    font-size: 25px;
+    transform: translateY(-50%); /* Centers them vertically */
+}
+
+a{
+    color: #000;
+}
+.comment-box{
+    padding: 50px;
+    width: 700px;
+    margin: 10px 250px;
+}
+.comment-box p {
+    font-size: large;
+}
+
+        .search-container {
+            padding: 30px;
+            border-radius: 8px;
+            margin: auto;
+            display: flex;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        h2 {
+            text-align: center;
+            width: 100%; 
+            font-weight: normal;
+            margin-top: 30px;
+        }
+        h3 {
+            margin-top: 0px;
+            font-weight: normal;
+        }
+        .filter-column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid;
+            margin-bottom: 15px;
+        }
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid;
+        }
+        .search-button {
+            display: block;
+            width: 50%;
+            padding: 12px;
+            border: 1px solid;
+            color: #000;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 250px;
+            background-color: white;
+        }
+        .search-button:hover {
+            background-color: #ccc;
+        }
+        .search-dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 600px;
+            height: 460px;
+            border: 1px solid;
+            border-radius: 5px;
+            z-index: 1000; 
+            right: 0;
+            margin-right: 200px;
+        }
+        .search-dropdown:hover .search-dropdown-content {
+            display: block;
+        }
+
+        .search-dropdown-content a:hover { background: #ccc; }
+
+        .servings-input { width: 90% }
+
+        .nutrition-grid input { width: 90% }
+
+        .filter-column input { width: 96% }
+        
+</style>
+</head>
+<header>
+    <div class="logo">TITLE</div>
+
+    <nav class="nav">
+
+            
+    <div class="search-dropdown">
+        <div class="dropdown-toggle">Search ▼</div>
+        <div class="search-dropdown-content">
+            <div class="search-container">
+
+        <!-- Left Column: Search & Filters -->
+        <div class="filter-column">
+            <input type="text" class="search-input" placeholder="Search any keyword">
+
+            <div class="filter-grid">
+                <div>
+                    <label>Category</label>
+                    <select>
+                        <option value="" disabled selected>Select a category</option>
+                        <option>Main Dish</option>
+                         <option>Appetizers & Snacks</option>
+                        <option>Soups & Stews</option>
+                        <option>Salads & Sides</option>
+                        <option>Brunch</option>
+                        <option>Desserts & Sweets</option>
+                        <option>Drinks & Beverages</option>
+                        <option>Vegetables</option>
+                        <option>Occasional</option>
+                        <option>Healthy & Special Diets</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Difficulty Level</label>
+                    <select>
+                        <option value="" disabled selected>Select a difficulty level</option>
+                        <option>Easy</option>
+                        <option>Medium</option>
+                        <option>Hard</option>
+                        <option>Extreme</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Preparation Type</label>
+                    <select>
+                        <option value="" disabled selected>Select a preparation type</option>
+                        <option>Raw</option>
+                        <option>Boiling</option>
+                        <option>Steaming</option>
+                        <option>Blanching</option>
+                        <option>Simmering</option>
+                        <option>Sautéing</option>
+                        <option>Frying</option>
+                        <option>Grilling</option>
+                        <option>Roasting</option>
+                        <option>Baking</option>
+                        <option>Broiling</option>
+                         <option>Poaching</option>
+                        <option>Braising</option>
+                        <option>Stewing</option>
+                        <option>Smoking</option>
+                        <option>Fermenting</option>
+                        <option>Pickling</option>
+                        <option>Marinating</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Cooking Time</label>
+                    <select>
+                        <option value="" disabled selected>Select a cooking time</option>
+                        <option>1-5 minutes</option>
+                        <option>5-15 minutes</option>
+                        <option>15-30 minutes</option>
+                        <option>30-60 minutes</option>
+                        <option>1-3 hours</option>
+                        <option>Above 3 hours</option>  
+                    </select>
+                </div>
+                <div>
+                    <label>Servings</label>
+                    <input class="servings-input" type="number" placeholder="Enter servings">
+                </div>
+                <div>
+                    <label>Budget Level</label>
+                    <select>
+                        <option value="" disabled selected>Select a budget level</option>
+                          <option>Ultra Low Budget</option>
+                            <option>Low Budget</option>
+                            <option>Mid Budget</option>
+                            <option>High Budget</option>
+                            <option>Luxury Budget</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Nutritional Information -->
+        <div class="filter-column">
+            <h3>Nutritional Information</h3>
+
+            <div class="nutrition-grid">
+                <div>
+                    <label>Calories (kcal)</label>
+                    <input type="number" placeholder="Enter calories">
+                </div>
+                <div>
+                    <label>Fat (g)</label>
+                    <input type="number" placeholder="Enter fat content">
+                </div>
+                <div>
+                    <label>Carbohydrates (g)</label>
+                    <input type="number" placeholder="Enter carbohydrates content">
+                </div>
+                <div>
+                    <label>Fiber (g)</label>
+                    <input type="number" placeholder="Enter fiber content">
+                </div>
+                <div>
+                    <label>Cholesterol (mg)</label>
+                    <input type="number" placeholder="Enter cholesterol content">
+                </div>
+                <div>
+                    <label>Sodium (mg)</label>
+                    <input type="number" placeholder="Enter sodium content">
+                </div>
+                <div>
+                    <label>Protein (g)</label>
+                    <input type="number" placeholder="Enter protein content">
+                </div>
+                <div>
+                    <label>Sugar (g)</label>
+                    <input type="number" placeholder="Enter sugar content">
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Search Button (Centered Below Both Columns) -->
+        <a href="guestbrowse.html" style="text-decoration: none;"><button class="search-button">Search</button></a>
+    </div>
+
+    </div>
+
+        <div class="dropdown">
+            <div class="dropdown-toggle">Sort By ▼</div>
+            <div class="dropdown-content">
+                <a href="guestbrowse.html">Latest</a>
+                <a href="guestbrowse.html">Most Popular</a>
+                <a href="guestbrowse.html">Most Favorite</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-toggle">Category ▼</div>
+                <div class="dropdown-content">
+                <table class="category-table">
+                    <tr class="category-table">
+                        <td class="category-table"><a class="dropdown-item" href="guestmaindish.html">Main Dish</a></td>
+                        <td class="category-table"><a class="dropdown-item" href="guestmaindish.html">Appetizers & Snacks</a></td>
+                        <td class="category-table"><a class="dropdown-item" href="guestmaindish.html">Soups & Stews</a></td>
+                    </tr>
+                    <tr class="category-table">
+                        <td class="category-table"><a class="dropdown-item" href="guestmaindish.html">Salads & Sides</a></td>
+                        <td class="category-table"><a class="dropdown-item" href="guestmaindish.html">Brunch</a></td>
+                        <td class="category-table"><a class="dropdown-item" href="guestmaindish.html">Desserts & Sweets</a></td>
+                    </tr>
+                    <tr class="category-table">
+                        <td class="category-table"><a class="dropdown-item" href="guestmaindish.html">Drinks & Beverages</a></td>
+                        <td class="category-table"><a class="dropdown-item" href="guestmaindish.html">Vegetables</a></td>
+                        <td class="category-table"><a class="dropdown-item" href="guestmaindish.html">Occasional</a></td>
+                    </tr>
+                    <tr class="category-table">
+                        <td class="category-table"><a class="dropdown-item" href="guestmaindish.html">Healthy & Special Diets</a></td>
+                        <td class="category-table"></td> <!-- Empty Cell -->
+                        <td class="category-table"></td> <!-- Empty Cell -->
+                    </tr>
+                </table>
+            </div>
+        </div>
+        <div>
+            <a href="signin.html" style="text-decoration: none; color: #000;"><i class="fa fa-heart"></i> Favorites</a>
+        </div>
+            <a href="signin.html" style="text-decoration: none;"><button style="padding: 10px 20px; border: solid; border-width: 1px; cursor: pointer;">Sign In</button></a>
+        </nav>
+</header>
+<body>
+
+<div class="recipe-container">
+     <div class="recipe-header">
+            <div class="recipe-header-left">
+                <p>[ Recipe Name ]</p>
+                <p class="author">by <a href="guestprofile.html"> [ @username ]</a></p>
+            </div>
+            <div class="icons">
+                <a href="signin.html" style="text-decoration:none; color: #000;"><i class="fa fa-exclamation-circle"></i></a>
+                <a href="share.html" style="text-decoration:none; color: #000;"><i class="fa fa-share"></i></a>
+            </div>
+        </div>
+    <!-- Row 1: Image & Recipe Info -->
+    <div class="row-recipe-details">
+        <div class="recipe-column">
+        <img src="img/sample.png" alt="Recipe Image">
+        </div>
+        <div class="recipe-column">
+    <div class="recipe-info">
+        <div class="info-grid">
+            <div class="info-item">
+                <p>Category</p>
+                <p>[ Value ]</p>
+            </div>
+            <div class="info-item">
+                <p>Preparation Type</p>
+                <p>[ Value ]</p>
+            </div>
+            <div class="info-item">
+                <p>Cooking Time</p>
+                <p>[ Value ]</p>
+            </div>
+            <div class="info-item">
+                <p>Difficulty Level</p>
+                <p>[ Value ]</p>
+            </div>
+            <div class="info-item">
+                <p>Servings</p>
+                <p>[ Value ]</p>
+            </div>
+            <div class="info-item">
+                <p>Budget Level</p>
+                <p>[ Value ]</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+    </div>
+    
+    <!-- Row 2: Description -->
+    <div class="row">
+        <div class="description">
+            <p> [ Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
+            quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
+            consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
+            cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+            proident, sunt in culpa qui officia deserunt mollit anim id est laborum. ]</p>
+        </div>
+    </div>
+    
+    <!-- Row 3: Ingredients & Equipment -->
+    <div class="row-recipe-details">
+        <div class="recipe-column">
+            <div class="recipe-details">
+                <p>Ingredients</p>
+                <ul>
+                    <li><input type="checkbox"> [ Ingredient Name 1 ]</li>
+                    <li><input type="checkbox"> [ Ingredient Name 2 ]</li>
+                    <li><input type="checkbox"> [ Ingredient Name 3 ]</li>
+                </ul>
+            </div>
+        </div>
+        <div class="recipe-column">
+            <div class="recipe-details">
+                <p>Equipment</p>
+                <ul>
+                    <li><input type="checkbox"> [ Equipment Name 1 ]</li>
+                    <li><input type="checkbox"> [ Equipment Name 2 ]</li>
+                    <li><input type="checkbox"> [ Equipment Name 3 ]</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Row 4: Instructions & Nutrition Info -->
+    <div class="row">
+        <div class="instructions">
+            <p>Instructions</p>
+            <ol>
+                <li>[ Instruction 1 ]</li>
+                <li>[ Instruction 2 ]</li>
+                <li>[ Instruction 3 ]</li>
+            </ol>
+        </div>
+       <div class="nutrition">
+    <p>Nutritional Info</p>
+    <table class="nutri-table">
+        <tr class="nutri-table">
+            <th class="nutri-table">Nutrient</th>
+            <th class="nutri-table">Amount</th>
+        </tr>
+        <tr class="nutri-table">
+            <td class="nutri-table">Calories</td>
+            <td class="nutri-table">[ 00 ] kcal</td>
+        </tr>
+        <tr class="nutri-table">
+            <td class="nutri-table">Fat</td>
+            <td class="nutri-table">[ 00 ] g</td>
+        </tr>
+        <tr class="nutri-table">
+            <td class="nutri-table">Protein</td>
+            <td class="nutri-table">[ 00 ] g</td>
+        </tr>
+        <tr class="nutri-table">
+            <td class="nutri-table">Carbohydrates</td>
+            <td class="nutri-table">[ 00 ] g</td>
+        </tr>
+        <tr class="nutri-table">
+            <td class="nutri-table">Fiber</td>
+            <td class="nutri-table">[ 00 ] g</td>
+        </tr>
+        <tr class="nutri-table">
+            <td class="nutri-table">Sugars</td>
+            <td class="nutri-table">[ 00 ] g</td>
+        </tr>
+        <tr class="nutri-table">
+            <td class="nutri-table">Cholesterol</td>
+            <td class="nutri-table">[ 00 ] mg</td>
+        </tr>
+        <tr class="nutri-table">
+            <td class="nutri-table">Sodium</td>
+            <td class="nutri-table">[ 00 ] mg</td>
+        </tr>
+    </table>
+</div></div>    
+    </div>
+
+</div>
+  <div class="comment-box">
+        <p>Comments</p>
+    <textarea placeholder="Write your comment..."></textarea>
+     <a href="signin.html" style="text-decoration:none; color: #000;"><button class="button">Submit</button></a>
+</div>
+
+
+
+     <footer class="footer">
+            <footer>
+    <!-- Footer Wireframe Start -->
+<div style=" margin-top: 10px;">
+    <div style="padding: 50px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <div style="flex: 1; min-width: 200px;">
+                <h4 style=" font-weight: normal; margin-bottom: 20px;">Company</h4>
+                <div style="width: 150px; height: 20px; border: 2px solid; margin-bottom: 5px;"></div>
+                <div style="width: 150px; height: 20px;border: 2px solid;margin-bottom: 5px;"></div>
+                <div style="width: 150px; height: 20px; border: 2px solid;"></div>
+            </div>
+            <div style="flex: 2; text-align: center;">
+                <div style="width: 300px; height: 60px; border: 2px solid; margin: auto; padding-top: 35px;"> TITLE </div>
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <h4 style="font-weight: normal; margin-bottom: 20px;">Contact</h4>
+                <div style="width: 200px; height: 20px; border: 2px solid; margin-bottom: 5px;"></div>
+                <div style="width: 200px; height: 20px; border: 2px solid; margin-bottom: 5px;"></div>
+                <div style="display: flex; gap: 5px; padding-top: 10px;">
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 20px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; text-align: center;">
+            <div style="flex: 1; min-width: 250px;">
+                <div style="width: 250px; height: 20px; border: 2px solid; margin: auto;"></div>
+            </div>
+            <div style="flex: 1; min-width: 250px; display: flex; justify-content: center; gap: 10px;">
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+        <p>&copy; 2025 Your Company. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>

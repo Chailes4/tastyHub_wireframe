@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tasty Hub | Submit Your Recipe</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: solid; border-width:2px  }
+        .logo a { text-decoration: none; color: black; }
+        .footer { padding: 20px; text-align: center; color: black; border-top: 2px solid;}
+        .nav { display: flex; align-items: center; gap: 20px; }
+        .dropdown { position: relative; display: inline-block; }
+        .dropdown-toggle{
+            cursor: pointer;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .profile-icon {
+            cursor: pointer;
+            padding: 10px;
+            border: 1px solid;
+            border-radius: 50px;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 170px;
+            border: 1px solid;
+            border-radius: 5px;
+            z-index: 1000; 
+            right: 0;
+        }
+        .dropdown-content a {
+            display: block;
+            padding: 10px;
+            text-decoration: none;
+            color: black;
+        }
+        .dropdown-content a:hover { background: #f0f0f0; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        .recipe-container {
+            max-width: 900px;
+            padding: 20px;
+            margin: 10px auto;
+            border: 2px solid #000; /* Black border for wireframe */
+            background-color: white; /* White background for the form */
+        }
+
+        p {
+            text-align: center;
+            margin-bottom: 20px;
+            grid-column: span 2; 
+            font-weight: normal;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        input[type="text"],
+        input[type="file"],
+        select,
+        textarea {
+            width: calc(100% - 16px);
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid #000; 
+            border-radius: 0;
+        }
+        input[type="number"]{
+            width: calc(93% - 16px);
+            padding: 10px;
+            margin-top: 8px;
+            border: 1px solid #000; 
+            border-radius: 0;
+        }
+
+        textarea {
+            resize: vertical;
+            padding-bottom: 15px;
+        }
+
+        button {
+            display: inline-block;
+            padding: 12px 20px;
+            margin-top: 15px;
+            border: 1px solid #000; /* Black border for wireframe */
+            cursor: pointer;
+            text-align: center;
+            background: none; /* No background color */
+        }
+
+        button:hover {
+            background-color: #ccc; /* Light gray background on hover */
+        } 
+        .button {
+            display: inline-block;
+            padding: 12px 20px;
+            margin-top: 15px;
+            border: 1px solid #000; /* Black border for wireframe */
+            cursor: pointer;
+            text-align: center;
+            background: none; /* No background color */
+        }
+
+        .button:hover {
+            background-color: #ccc; /* Light gray background on hover */
+        }
+
+        .row {
+            display: flex;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .column {
+            flex: 1; /* Equal width for both columns */
+            padding: 10px;
+            margin: 5px; /* Space between columns */
+        }
+
+        .nutritional-grid {
+            margin-top: 50px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            padding: 20px;
+            border: 1px solid #000; /* Black border for wireframe */
+        }
+
+        .grid-title {
+            grid-column: span 2;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .grid-item {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .search-container {
+            padding: 30px;
+            margin: auto;
+            display: flex;
+            max-width: 900px;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+        h3 {
+            margin-top: 0px;
+            font-weight: normal;
+        }
+        .filter-column {
+            flex: 1;
+            min-width: 300px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid;
+            margin-bottom: 15px;
+        }
+        .filter-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+        }
+        .nutrition-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .filter-grid label {
+            font-weight: normal;
+            display: block;
+            margin-bottom: 5px;
+        }
+        .filter-grid select, input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid;
+        }
+        .search-button {
+            display: block;
+            width: 50%;
+            padding: 12px;
+            border: 1px solid;
+            color: #000;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 20px;
+            margin-left: 250px;
+            background-color: white;
+        }
+        .search-button:hover {
+            background-color: #ccc;
+        }
+        .search-dropdown-content {
+            display: none;
+            position: absolute;
+            background: white;
+            min-width: 550px;
+            height: 550px;
+            border: 1px solid;
+            z-index: 1000; 
+            right: 0;
+            margin-right: 200px;
+            border-radius: 5px;
+        }
+        .search-dropdown:hover .search-dropdown-content {
+            display: block;
+        }
+
+        .search-dropdown-content a:hover { background: #ccc; }
+
+        .servings-input { width: 90% }
+
+        .nutrition-grid input { width: 90% }
+
+        .filter-column input { width: 96% }
+        
+    </style>
+</head>
+<header>
+    <div class="logo"><a href="indexlogin.html">TITLE</a></div>
+
+    <nav class="nav">
+  
+      <div class="search-dropdown">
+        <div class="dropdown-toggle">Search ▼</div>
+        <div class="search-dropdown-content">
+            <div class="search-container">
+
+        <!-- Left Column: Search & Filters -->
+        <div class="filter-column">
+            <input type="text" class="search-input" placeholder="Search any keyword">
+
+            <div class="filter-grid">
+                <div>
+                    <label>Category</label>
+                    <select>
+                        <option value="" disabled selected>Select a category</option>
+                        <option>Main Dish</option>
+                        <option>Appetizers & Snacks</option>
+                        <option>Soups & Stews</option>
+                        <option>Salads & Sides</option>
+                        <option>Brunch</option>
+                        <option>Desserts & Sweets</option>
+                        <option>Drinks & Beverages</option>
+                        <option>Vegetables</option>
+                        <option>Occasional</option>
+                        <option>Healthy & Special Diets</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Difficulty Level</label>
+                    <select>
+                         <option value="" disabled selected>Select a difficulty level</option>
+                            <option>Easy</option>
+                            <option>Medium</option>
+                            <option>Hard</option>
+                            <option>Extreme</option>
+
+                    </select>
+                </div>
+                <div>
+                    <label>Preparation Type</label>
+                    <select>
+                        <option value="" disabled selected>Select a preparation type</option>
+                        <option>Raw</option>
+                        <option>Boiling</option>
+                        <option>Steaming</option>
+                        <option>Blanching</option>
+                        <option>Simmering</option>
+                        <option>Sautéing</option>
+                        <option>Frying</option>
+                        <option>Grilling</option>
+                        <option>Roasting</option>
+                        <option>Baking</option>
+                        <option>Broiling</option>
+                        <option>Poaching</option>
+                        <option>Braising</option>
+                        <option>Stewing</option>
+                        <option>Smoking</option>
+                        <option>Fermenting</option>
+                        <option>Pickling</option>
+                        <option>Marinating</option>
+                    </select>
+                </div>
+                <div>
+                    <label>Cooking Time</label>
+                    <select>
+                         <option value="" disabled selected>Select a cooking time</option>
+                        <option>1-5 minutes</option>
+                        <option>5-15 minutes</option>
+                        <option>15-30 minutes</option>
+                        <option>30-60 minutes</option>
+                        <option>1-3 hours</option>
+                        <option>Above 3 hours</option>   
+                    </select>
+                </div>
+                <div>
+                    <label>Servings</label>
+                    <input class="servings-input" type="number" placeholder="Enter servings">
+                </div>
+                <div>
+                    <label>Budget Level</label>
+                    <select>
+                        <option value="" disabled selected>Select a budget level</option>
+                        <option>Ultra Low Budget</option>
+                        <option>Low Budget</option>
+                        <option>Mid Budget</option>
+                        <option>High Budget</option>
+                        <option>Luxury Budget</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Column: Nutritional Information -->
+        <div class="filter-column">
+            <h3>Nutritional Information</h3>
+
+            <div class="nutrition-grid">
+                <div>
+                    <label>Calories (kcal)</label>
+                    <input type="number" placeholder="Enter calories">
+                </div>
+                <div>
+                    <label>Fat (g)</label>
+                    <input type="number" placeholder="Enter fat content">
+                </div>
+                <div>
+                    <label>Carbohydrates (g)</label>
+                    <input type="number" placeholder="Enter carbohydrates content">
+                </div>
+                <div>
+                    <label>Fiber (g)</label>
+                    <input type="number" placeholder="Enter fiber content">
+                </div>
+                <div>
+                    <label>Cholesterol (mg)</label>
+                    <input type="number" placeholder="Enter cholesterol content">
+                </div>
+                <div>
+                    <label>Sodium (mg)</label>
+                    <input type="number" placeholder="Enter sodium content">
+                </div>
+                <div>
+                    <label>Protein (g)</label>
+                    <input type="number" placeholder="Enter protein content">
+                </div>
+                <div>
+                    <label>Sugar (g)</label>
+                    <input type="number" placeholder="Enter sugar content">
+                </div>
+            </div>
+        </div>
+    </div>
+
+        <!-- Search Button (Centered Below Both Columns) -->
+        <a href="browse.html" style="text-decoration: none;"><button class="search-button">Search</button></a>
+    </div>
+
+    </div>   
+         
+  
+        <div class="dropdown">
+            <div class="dropdown-toggle">Sort By ▼</div>
+            <div class="dropdown-content">
+                <a href="browse.html">Latest</a>
+                <a href="browse.html">Most Popular</a>
+                <a href="browse.html">Most Favorite</a>
+            </div>
+        </div>
+
+        <div class="dropdown">
+            <div class="dropdown-toggle">Category ▼</div>
+                <div class="dropdown-content">
+                <table class="category-table">
+                    <tr>
+                        <td><a class="dropdown-item" href="maindish.html">Main Dish</a></td>
+                        <td><a class="dropdown-item" href="maindish.html">Appetizers & Snacks</a></td>
+                        <td><a class="dropdown-item" href="maindish.html">Soups & Stews</a></td>
+                    </tr>
+                    <tr>
+                        <td><a class="dropdown-item" href="maindish.html">Salads & Sides</a></td>
+                        <td><a class="dropdown-item" href="maindish.html">Brunch</a></td>
+                        <td><a class="dropdown-item" href="maindish.html">Desserts & Sweets</a></td>
+                    </tr>
+                    <tr>
+                        <td><a class="dropdown-item" href="maindish.html">Drinks & Beverages</a></td>
+                        <td><a class="dropdown-item" href="maindish.html">Vegetables</a></td>
+                        <td><a class="dropdown-item" href="maindish.html">Occasional</a></td>
+                    </tr>
+                    <tr>
+                        <td><a class="dropdown-item" href="maindish.html">Healthy & Special Diets</a></td>
+                        <td></td> <!-- Empty Cell -->
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div>
+            <a href="favorites.html" style="text-decoration: none; color: #000;"><i class="fa fa-heart"></i> Favorites</a>
+        </div>
+
+        <div class="dropdown">
+            <div class="profile-icon"><i class="fas fa-user"></i></div>
+            <div class="dropdown-content">
+                <a href="profile.html">Profile</a>
+                <a href="browse.html">Browse</a>
+                <a href="submit_recipe.html">Submit a Recipe</a>
+                <a href="aboutlogin.html">About</a>
+                <a href="index.html">Log out</a>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<body>
+    <div class="recipe-container">
+        <p>Submit Your Recipe</p>
+        <form action="#" method="post" enctype="multipart/form-data">
+            <div class="row">
+                <div class="column">
+                    <label>Recipe Name:</label>
+                    <input type="text" name="recipe_name" value="Tune Sisig" >
+
+                    <label>Upload Image:</label>
+                    <input type="file" name="recipe_image" accept="image/*" >
+
+                    <label>Description:</label>
+                    <textarea name="description" rows="4" >Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex eaconsequat. Duis aute irure dolor in reprehenderit in voluptate velit </textarea>
+                </div>
+               <div class="column" style="display: grid; grid-template-columns: 1fr 2fr; gap: 5px; width: 90%; max-width: 500px;">
+    <label>Category:</label>
+    <select name="category">
+        <option value="" disabled selected>Main Dish</option>
+        <option>Main Dish</option>
+        <option>Appetizers & Snacks</option>
+        <option>Soups & Stews</option>
+        <option>Salads & Sides</option>
+        <option>Brunch</option>
+        <option>Desserts & Sweets</option>
+        <option>Drinks & Beverages</option>
+        <option>Vegetables</option>
+        <option>Occasional</option>
+        <option>Healthy & Special Diets</option>
+    </select>
+
+    <label>Preparation Type:</label>
+    <select name="preparation_type">
+        <option value="" disabled selected>Frying</option>
+        <option>Raw</option>
+        <option>Boiling</option>
+        <option>Steaming</option>
+        <option>Blanching</option>
+        <option>Simmering</option>
+        <option>Sautéing</option>
+        <option>Frying</option>
+        <option>Grilling</option>
+        <option>Roasting</option>
+        <option>Baking</option>
+        <option>Broiling</option>
+        <option>Poaching</option>
+        <option>Braising</option>
+        <option>Stewing</option>
+        <option>Smoking</option>
+        <option>Fermenting</option>
+        <option>Pickling</option>
+        <option>Marinating</option>
+    </select>
+
+    <label>Difficulty Level:</label>
+    <select name="difficulty">
+        <option value="" disabled selected>Medium</option>
+        <option>Easy</option>
+        <option>Medium</option>
+        <option>Hard</option>
+        <option>Extreme</option>
+    </select>
+
+    <label>Budget Level:</label>
+    <select name="budget_level">
+        <option value="" disabled selected>Low Budget</option>
+        <option>Ultra-Low Budget</option>
+        <option>Low Budget</option>
+        <option>Med Budget</option>
+        <option>High Budget</option>
+        <option>Luxury Budget</option>
+    </select>
+
+    <label>Cooking Time (minutes):</label>
+    <input type="number" name="cooking_time" value="10"  style="border: 1px solid black;">
+
+    <label>Servings:</label>
+    <input type="number" name="servings" value="2"  style="border: 1px solid black;">
+</div>
+
+            </div>
+                    <div style="border: 1px dashed; margin: 10px 20px;"></div>
+
+
+            <div class="row">
+                <div class="column">
+                    <label>Ingredients:</label>
+                    <div class="input-grid" id="ingredients-list">
+                        <input type="text" name="ingredient[]" value="Canned Tuna" placeholder="Enter ingredient 1">
+                        <button type="button" style="border: 1px solid #000;">Remove</button>
+                    </div>
+                    <button type="button" style="border: 1px solid #000;">Add Ingredient</button>
+                </div>
+                <div class="column">
+                    <label>Equipment:</label>
+                    <div class="input-grid" id="equipment-list">
+                        <input type="text" name="equipment[]" value="Frying Pan" placeholder="Enter equipment 1">
+                        <button type="button" style="border: 1px solid #000;">Remove</button>
+                    </div>
+                    <button type="button" style="border: 1px solid #000;">Add Equipment</button>
+                </div>
+            </div>
+
+                    <div style="border: 1px dashed; margin: 10px 20px;"></div>
+
+
+            <div class="row">
+                <div style="display: flex; flex-direction: column; gap: 10px; width: 100%; max-width: 800px; margin: auto;">
+                    <label>Instructions:</label>
+                     <div style="display: flex;  gap: 10px; align-items: center;">
+                    <input name="instructions" value="Drain the Tuna." rows="4" required style="border: 1px solid black; padding: 20px; width: 100%; margin-top: 12px" placeholder="Enter instruction 1"></input>
+                    <button type="button" style="border: 1px solid black; padding: 10px;">Remove Instruction</button>
+                    </div>
+                     <div style="display: flex;  gap: 10px;">
+                        
+                        <button type="button" style="border: 1px solid black; padding: 5px;">Add Instruction</button>
+                    </div>
+        </div>
+
+            </div>
+
+        <div style="border: 1px dashed; margin: 10px 20px;"></div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; width: 100%; max-width: 600px; margin: auto; padding: 15px; border: 1px solid #000; border-radius: 5px; margin-top: 30px; text-align: center;">
+                
+                <!-- Title spanning 3 columns -->
+                <p style="grid-column: span 3; margin-bottom: 10px;">Nutritional Info</p>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label>Calories (kcal)</label>
+                    <input type="number" value="100" placeholder="00" style="padding: 5px; border: 1px solid black;">
+                </div>
+                
+                <div style="display: flex; flex-direction: column;">
+                    <label>Fat (g)</label>
+                    <input type="number" value="10" placeholder="00" style="padding: 5px; border: 1px solid black;">
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label>Protein (g)</label>
+                    <input type="number" value="10" placeholder="00" style="padding: 5px; border: 1px solid black;">
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label>Carbohydrates (g)</label>
+                    <input type="number" value="100" placeholder="00" style="padding: 5px; border: 1px solid black;">
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label>Fiber (g)</label>
+                    <input type="number" value="100" placeholder="00" style="padding: 5px; border: 1px solid black;">
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label>Sugars (g)</label>
+                    <input type="number" value="10" placeholder="00" style="padding: 5px; border: 1px solid black;">
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label>Cholesterol (mg)</label>
+                    <input type="number" value="100" placeholder="00" style="padding: 5px; border: 1px solid black;">
+                </div>
+
+                <div style="display: flex; flex-direction: column;">
+                    <label>Sodium (mg)</label>
+                    <input type="number" value="10" placeholder="00" style="padding: 5px; border: 1px solid black;">
+                </div>
+
+
+            </div>
+
+
+
+            <div class="row">
+                <div class="column" style="grid-column: span 2; text-align: right;">
+                    <a class="button" href="recipepost.html" style="padding: 15px 100px; text-decoration: none; color: #000">Update Recipe</a>
+                </div>
+            </div>
+        </form>
+    </div>
+<footer class="footer">
+            <footer>
+    <!-- Footer Wireframe Start -->
+<div style=" margin-top: 10px;">
+    <div style="padding: 50px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <div style="flex: 1; min-width: 200px;">
+                <h4 style=" font-weight: normal; margin-bottom: 20px;">Company</h4>
+                <div style="width: 150px; height: 20px; border: 2px solid; margin-bottom: 5px;"></div>
+                <div style="width: 150px; height: 20px;border: 2px solid;margin-bottom: 5px;"></div>
+                <div style="width: 150px; height: 20px; border: 2px solid;"></div>
+            </div>
+            <div style="flex: 2; text-align: center;">
+                <div style="width: 300px; height: 60px; border: 2px solid; margin: auto; padding-top: 35px;"> TITLE </div>
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <h4 style="font-weight: normal; margin-bottom: 20px;">Contact</h4>
+                <div style="width: 200px; height: 20px; border: 2px solid; margin-bottom: 5px;"></div>
+                <div style="width: 200px; height: 20px; border: 2px solid; margin-bottom: 5px;"></div>
+                <div style="display: flex; gap: 5px; padding-top: 10px;">
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 20px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; text-align: center;">
+            <div style="flex: 1; min-width: 250px;">
+                <div style="width: 250px; height: 20px; border: 2px solid; margin: auto;"></div>
+            </div>
+            <div style="flex: 1; min-width: 250px; display: flex; justify-content: center; gap: 10px;">
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+        <p>&copy; 2025 Your Company. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report Form</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+        }
+
+        .report-box {
+            width: 300px;
+            padding: 15px;
+            border: 1px solid black;
+            border-radius: 8px;
+            background-color: white;
+            text-align: left;
+        }
+
+        .report-box h3 {
+            margin: 0 0 10px;
+            text-align: center;
+        }
+
+        .report-box label {
+            padding: 10px;
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            text-align: justify-all;
+        }
+
+        .report-box input[type="checkbox"] {
+            margin-right: 5px;
+        }
+
+        .divider {
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        .submit-button {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid black;
+            background-color: white;
+            cursor: pointer;
+            text-align: center;
+            margin-bottom: 10px;
+        }
+
+        .submit-button:hover {
+            background-color: #eee;
+        }
+        .input-box {
+            margin: 0px 0px 15px 10px;
+            width: 90%;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="report-box">
+        <h3>Reason for Reporting</h3>
+
+        <label><input type="checkbox"> Offensive or Inappropriate Content (e.g., harmful language, sensitive material)</label>
+        <label><input type="checkbox"> Plagiarism / Copyright Violation (Copied from another source)</label>
+        <label><input type="checkbox"> Misleading or Unsafe Recipe (e.g., dangerous instructions, incorrect measurements)</label>
+        <label><input type="checkbox"> Spam or Promotional Content</label>
+        <label><input type="checkbox"> Other (Please Specify):</label>
+
+        <input class="input-box" type="text" name="">
+
+        <a href="viewers_recipepost.html"><button class="submit-button">Submit</button></a>
+        <a href="viewers_recipepost.html" style="margin-left: 100px;;">Back to Post</a>
+    </div>
+
+</body>
+</html>

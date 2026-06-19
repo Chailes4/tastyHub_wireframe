@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reports Management</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            position: relative;
+            margin-right: 230px;
+        }
+        .report-container {
+            margin-top: 10px;
+        }
+        .report-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            margin-bottom: 10px;
+        }
+        .report {
+            border: 1px solid black;
+            padding: 15px;
+            width: 100%;
+            background: white;
+            padding: 50px;
+            border-radius: 5px;
+        }
+        .actions {
+            display: flex;
+            gap: 70px;
+            position: absolute;
+            right: -180px;
+        }
+        .delete-post, .delete-report {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        .delete-post {
+            background-color: red;
+            color: white;
+        }
+        .delete-report {
+            color: red;
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .header {
+            display: flex;
+            justify-content: flex-end;
+            gap: 30px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        a{
+            text-decoration: none; 
+            color: black;
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html">Log Out</a>
+
+    <h3 style="display: flex; justify-content: space-between; align-items: center; font-weight: normal;">
+       <a href="admin.html"><span><strong>Reports</strong></span></a>
+
+       <a href="feedbackadmin.html"><span style="margin-right: 800px;">Feedback</span></a>
+        <div style="display: flex; gap: 30px;">
+            <span>Delete Post</span>
+            <span>Delete Report</span>
+        </div>
+    </h3>
+
+    <div class="container">
+        
+        <div class="report-container">
+            <div class="report-wrapper">
+                <div class="report">Recipe Post</div>
+                <div class="actions">
+                    <div class="delete-post">✖</div>
+                    <div class="delete-report"><i class="bi bi-trash"></i></div>
+                </div>
+            </div>
+
+            <div class="report-wrapper">
+                <div class="report">Recipe Post</div>
+                <div class="actions">
+                    <div class="delete-post">✖</div>
+                    <div class="delete-report"><i class="bi bi-trash"></i></div>
+                </div>
+            </div>
+
+            <div class="report-wrapper">
+                <div class="report">Recipe Post</div>
+                <div class="actions">
+                    <div class="delete-post">✖</div>
+                    <div class="delete-report"><i class="bi bi-trash"></i></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

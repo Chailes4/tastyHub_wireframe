@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Tasty Hub | About </title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+</head>
+  <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 15px; border-bottom: solid; border-width:2px  }
+        .logo a { text-decoration: none; color: black; }
+        .nav { display: flex; gap: 15px; align-items: center;}
+        .nav a {text-decoration: none; color: #000;}
+        .hero { text-align: center; padding: 50px; border-bottom: 2px solid;}
+        .features { display: flex; justify-content: center; gap: 20px; padding: 40px; }
+        .feature-box { width: 30%; padding: 20px; text-align: center; height: 100px; border: 2px solid;}
+        .testimonials { padding: 40px; text-align: center; }
+        .footer { padding: 20px; text-align: center; color: black; border-top: 2px solid; margin-top: 20px}
+        .Image { border-width: 2px; border-style: solid;}
+        .video-container { text-align:center; margin-top: 230px}
+        .feedback-container { display:flex;  padding: 20px}
+        input { padding:20px; border-width: 2px}
+        textarea { border-width: 2px}
+        a {text-decoration: none; color: #000;}
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            border-radius: 5px;
+            min-width: 160px;
+            right: 0;
+            border: 1px solid;
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover { background-color: #ddd; }
+        .dropdown:hover .dropdown-content { display: block; }
+        .profile-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            border: 1px solid;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+    </style>
+
+<body class="bg-white">
+    <div class="container-xxl bg-white p-0">
+     
+ <header>
+    <div class="logo"><a href="indexlogin.html">TITLE</a></div>
+        <nav class="nav">
+            <a href="indexlogin.html">Home</a>
+            <a href="browse.html">Browse</a>
+            <a href="aboutlogin.html">About</a>
+        <div class="dropdown">
+            <div class="profile-icon"><i class="fas fa-user"></i></div>
+                <div class="dropdown-content">
+                    <a href="profile.html">Profile</a>
+                    <a href="browse.html">Browse</a>
+                    <a href="submit_recipe.html">Submit a Recipe</a>
+                    <a href="aboutlogin.html">About</a>
+                    <a href="index.html">Log out</a>
+                </div>
+            </div>        </nav>
+    </header>   
+
+                  
+        <!-- About Start -->
+       <section class="testimonials">
+       <!-- About Section Wireframe -->
+<div class="container" style="padding: 40px; border: 1px dashed #000;">
+    <div class="row" style="display: flex; gap: 20px;">
+        <!-- Image Grid Placeholder -->
+        <div class="col" style="flex: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+            <div class="Image" style="width: 100%; height: 100px; text-align: center; line-height: 100px;">Image</div>
+            <div class="Image" style="width: 75%; height: 100px; text-align: center; line-height: 100px; margin-top: 25px;">Image</div>
+            <div class="Image" style="width: 75%; height: 100px;  text-align: center; line-height: 100px;">Image</div>
+            <div class="Image" style="width: 100%; height: 100px;  text-align: center; line-height: 100px;">Image</div>
+        </div>
+        
+        <!-- Text Content Placeholder -->
+        <div class="col" style="flex: 1;">
+            <p>About Us</p>
+            <p>Welcome to <span>Tasty Hub</span></p>
+            <p>[Short description about the website and its purpose]</p>
+            <p>[Additional details about features, community, and benefits]</p>
+        </div>
+    </div>
+</div>
+    </section>
+        <!-- About End -->
+
+<!-- Feedback Form Start -->
+<div>
+    <div class="feedback-container">
+        <div style="width: 50%; vertical-align: top; padding: 20px; border: 1px solid black;">
+    <p>Feedback</p>
+    <p>We Value Your Opinion</p>
+    <form style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 20px;">
+        <!-- Name Input -->
+        <div style="display: flex; flex-direction: column;">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" placeholder="Enter your name">
+        </div>
+
+        <!-- Email Input -->
+        <div style="display: flex; flex-direction: column;">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" placeholder="Enter your email">
+        </div>
+
+        <!-- Feedback Input (Spans 2 Columns) -->
+        <div style="grid-column: span 2; display: flex; flex-direction: column;">
+            <label for="message">Your Feedback</label>
+            <textarea id="message" rows="4" placeholder="Write your feedback here"></textarea>
+        </div>
+
+        <!-- Submit Button (Spans 2 Columns) -->
+        <div style="grid-column: span 2;">
+            <button type="submit" style="width: 100%; padding:20px">Submit Feedback</button>
+        </div>
+    </form>
+</div>
+    
+        <!-- Video Placeholder -->
+        <div style=" width: 50%; vertical-align: top; padding: 20px; border: 1px solid black; text-align: center;">
+            <p style="margin-top: 190px;">Video Placeholder</p>
+        </div>
+    </div>
+</div>
+
+<!-- Feedback Form End -->
+
+<!-- Team Start -->
+<div style="display: flex; justify-content: center; align-items: center; min-height: 100vh;">
+    <div style="width: 800px; padding: 20px; text-align: center;">
+        <p>Team Members</p>
+        <p>Our Developers</p>
+
+        <div style="display: flex; justify-content: space-between; gap: 20px;">
+
+            <!-- First Team Member -->
+            <div style="width: 50%; padding: 15px; border: 1px solid black; text-align: center;">
+                <div style="width: 150px; height: 150px; border: 2px dashed black; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 10px auto;">
+                    <span>Image Placeholder</span>
+                </div>
+                <p>Althea Benedictos</p>
+                <p>Programmer</p>
+                <div style="margin-top: 10px;">
+                    <a href="#">Facebook</a> | 
+                    <a href="#">Twitter</a> | 
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+
+            <!-- Second Team Member -->
+            <div style="width: 50%; padding: 15px; border: 1px solid black; text-align: center;">
+                <div style="width: 150px; height: 150px; border: 2px dashed black; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 10px auto;">
+                    <span>Image Placeholder</span>
+                </div>
+                <p>Christine Chailes Reyes</p>
+                <p>Programmer</p>
+                <div style="margin-top: 10px;">
+                    <a href="#">Facebook</a> | 
+                    <a href="#">Twitter</a> | 
+                    <a href="#">Instagram</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Team End -->
+
+
+
+        
+    <footer class="footer">
+            <footer>
+    <!-- Footer Wireframe Start -->
+<div style=" margin-top: 10px;">
+    <div style="padding: 50px;">
+        <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+            <div style="flex: 1; min-width: 200px;">
+                <h4 style=" font-weight: normal; margin-bottom: 20px;">Company</h4>
+                <div style="width: 150px; height: 20px; border: 2px solid; margin-bottom: 5px;"></div>
+                <div style="width: 150px; height: 20px;border: 2px solid;margin-bottom: 5px;"></div>
+                <div style="width: 150px; height: 20px; border: 2px solid;"></div>
+            </div>
+            <div style="flex: 2; text-align: center;">
+                <div style="width: 300px; height: 60px; border: 2px solid; margin: auto; padding-top: 35px;"> TITLE </div>
+            </div>
+            <div style="flex: 1; min-width: 200px;">
+                <h4 style="font-weight: normal; margin-bottom: 20px;">Contact</h4>
+                <div style="width: 200px; height: 20px; border: 2px solid; margin-bottom: 5px;"></div>
+                <div style="width: 200px; height: 20px; border: 2px solid; margin-bottom: 5px;"></div>
+                <div style="display: flex; gap: 5px; padding-top: 10px;">
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                    <div style="width: 30px; height: 30px; border: 2px solid;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 20px;">
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; text-align: center;">
+            <div style="flex: 1; min-width: 250px;">
+                <div style="width: 250px; height: 20px; border: 2px solid; margin: auto;"></div>
+            </div>
+            <div style="flex: 1; min-width: 250px; display: flex; justify-content: center; gap: 10px;">
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+                <div style="width: 60px; height: 20px; border: 2px solid;"></div>
+            </div>
+        </div>
+    </div>
+</div>
+        <p>&copy; 2025 Your Company. All Rights Reserved.</p>
+    </footer>
+
+</body>
+
+</html>
